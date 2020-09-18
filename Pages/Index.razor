@@ -1,0 +1,37 @@
+﻿@page "/"
+@inherits OwningComponentBase
+
+<h5>Messages:</h5>
+<textarea @bind="ChatHistory" style="width:90%; margin:auto;" rows="15">
+</textarea>
+<input class="form-text" type="text" @bind="Text" />
+<button class="btn btn-primary" @onclick="Send">Send Message</button>
+
+@code {
+    private ISignalRService signalRService;
+    private string Text { get; set; }
+    public string ChatHistory { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        this.signalRService = ScopedServices.GetRequiredService<ISignalRService>();
+        if (!signalRService.IsConnected)
+        {
+            await signalRService.ConnectAsync();
+            this.signalRService.NewMessageReceived += SignalR_NewMessageReceived;
+        }
+        await base.OnInitializedAsync();
+    }
+
+    private async Task Send()
+    {
+        await signalRService.SendMessageAsync("WebUser", Text);
+        Text = string.Empty;
+    }
+
+    void SignalR_NewMessageReceived(object sender, Model.Message message)
+    {
+        ChatHistory += $"{message.Name} ({message.TimeReceived}) - {message.Text}" + Environment.NewLine;
+        StateHasChanged();
+    }
+}
