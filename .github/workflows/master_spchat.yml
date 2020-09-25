@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'spchat'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_f21784e51b434d0c9296b334012dcdfb }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_f3698977e33b42b5a7b58b180495d47f }}
         package: ${{env.DOTNET_ROOT}}/myapp 
