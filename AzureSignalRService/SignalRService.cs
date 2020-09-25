@@ -1,6 +1,4 @@
-﻿using SignalRChatClient.Model;
-using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.DependencyInjection;
+﻿using AzureSignalRService.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -8,12 +6,17 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace SignalRChatClient
+namespace AzureSignalRService
 {
     public class SignalRService : ISignalRService
     {
-        private readonly IConfiguration config;
+        private readonly string signalREndPoint;
+        private readonly string negotiateUri;
+        private readonly string postUri;
+        private readonly string messageName = "newMessage";
         private readonly HttpClient client;
         public event MessageReceivedHandler NewMessageReceived;
         public event ConnectionHandler Connected;
@@ -23,10 +26,20 @@ namespace SignalRChatClient
 
         public SignalRService(IConfiguration configuration)
         {
-            config = configuration;
+            signalREndPoint = configuration["SignalREndpoint"];
+            negotiateUri = configuration["NegotiateUri"];
+            postUri = configuration["PostUri"];
+
             client = new HttpClient();
         }
+        public SignalRService(string signalREndPoint, string negotiateUri, string postUri)
+        {
+            this.signalREndPoint = signalREndPoint;
+            this.negotiateUri = negotiateUri;
+            this.postUri = postUri;
 
+            client = new HttpClient();
+        }
         public async Task SendMessageAsync(string username, string message)
         {
             IsBusy = true;
@@ -39,7 +52,7 @@ namespace SignalRChatClient
 
             var json = JsonConvert.SerializeObject(newMessage);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var result = await client.PostAsync(new Uri(new Uri(config["SignalREndpoint"]),config["PostUri"]) , content);
+            var result = await client.PostAsync(new Uri(new Uri(signalREndPoint),postUri) , content);
 
             IsBusy = false;
         }
@@ -50,7 +63,7 @@ namespace SignalRChatClient
             {
                 IsBusy = true;
 
-                string negotiateJson = await client.GetStringAsync(new Uri(new Uri(config["SignalREndpoint"]), config["NegotiateUri"]));
+                string negotiateJson = await client.GetStringAsync(new Uri(new Uri(signalREndPoint), negotiateUri ));
                 NegotiateInfo negotiate = JsonConvert.DeserializeObject<NegotiateInfo>(negotiateJson);
 
                 HubConnection connection = new HubConnectionBuilder()
@@ -62,7 +75,7 @@ namespace SignalRChatClient
                     .Build();
 
                 connection.Closed += Connection_Closed;
-                connection.On<JObject>(config["MessageName"], AddNewMessage);
+                connection.On<JObject>(messageName, AddNewMessage);
                 await connection.StartAsync();
 
                 IsConnected = true;

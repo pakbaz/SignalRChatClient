@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace SignalRChatClient.Model
+namespace AzureSignalRService.Model
 {
     public class Message
     {

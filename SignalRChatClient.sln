@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRChatClient", "SignalRChatClient.csproj", "{5D428C4C-21FB-4CD3-9A2F-F3ED87539F10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRChatClient", "SignalRChatClient\SignalRChatClient.csproj", "{5D428C4C-21FB-4CD3-9A2F-F3ED87539F10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRChatClient.Mobile.Android", "SignalRChatClient.Mobile\SignalRChatClient.Mobile.Android\SignalRChatClient.Mobile.Android.csproj", "{1E3EB166-FE8B-410B-AFBF-C529C892FD00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRChatClient.Mobile", "SignalRChatClient.Mobile\SignalRChatClient.Mobile\SignalRChatClient.Mobile.csproj", "{D0F3D2EB-51A5-4DFE-B600-80A84D8C816E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureSignalRService", "AzureSignalRService\AzureSignalRService.csproj", "{0FB0342F-B28F-41D7-9BEC-308EA1DACD28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,20 @@ Global
 		{5D428C4C-21FB-4CD3-9A2F-F3ED87539F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D428C4C-21FB-4CD3-9A2F-F3ED87539F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D428C4C-21FB-4CD3-9A2F-F3ED87539F10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E3EB166-FE8B-410B-AFBF-C529C892FD00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E3EB166-FE8B-410B-AFBF-C529C892FD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E3EB166-FE8B-410B-AFBF-C529C892FD00}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1E3EB166-FE8B-410B-AFBF-C529C892FD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E3EB166-FE8B-410B-AFBF-C529C892FD00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E3EB166-FE8B-410B-AFBF-C529C892FD00}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D0F3D2EB-51A5-4DFE-B600-80A84D8C816E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F3D2EB-51A5-4DFE-B600-80A84D8C816E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F3D2EB-51A5-4DFE-B600-80A84D8C816E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F3D2EB-51A5-4DFE-B600-80A84D8C816E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FB0342F-B28F-41D7-9BEC-308EA1DACD28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB0342F-B28F-41D7-9BEC-308EA1DACD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB0342F-B28F-41D7-9BEC-308EA1DACD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB0342F-B28F-41D7-9BEC-308EA1DACD28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

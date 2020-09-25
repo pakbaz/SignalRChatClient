@@ -29,7 +29,7 @@
         Text = string.Empty;
     }
 
-    void SignalR_NewMessageReceived(object sender, Model.Message message)
+    void SignalR_NewMessageReceived(object sender, Message message)
     {
         ChatHistory += $"{message.Name} ({message.TimeReceived}) - {message.Text}" + Environment.NewLine;
         StateHasChanged();

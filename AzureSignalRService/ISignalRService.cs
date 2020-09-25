@@ -1,10 +1,10 @@
-﻿using SignalRChatClient.Model;
+﻿using AzureSignalRService.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SignalRChatClient
+namespace AzureSignalRService
 {
     public interface ISignalRService
     {
